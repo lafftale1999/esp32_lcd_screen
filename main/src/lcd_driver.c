@@ -18,6 +18,7 @@ static void out_nibble(const char half_byte) {
     ENABLE_READ();
     vTaskDelay(pdMS_TO_TICKS(1));
     DISABLE_READ();
+    vTaskDelay(pdMS_TO_TICKS(1));
 }
 
 static void send_command(const char cmd) {
@@ -71,14 +72,14 @@ void lcd_init() {
         .pull_down_en = GPIO_PULLDOWN_DISABLE,
         .pull_up_en = GPIO_PULLUP_DISABLE
     };
-    gpio_config(&gpio);
+    ESP_ERROR_CHECK(gpio_config(&gpio));
     
-    gpio_set_level(DB4_PIN,0);
-    gpio_set_level(DB5_PIN,0);
-    gpio_set_level(DB6_PIN,0);
-    gpio_set_level(DB7_PIN,0);
-    gpio_set_level(RS_PIN,0);
-    gpio_set_level(ENABLE_PIN,0);
+    ESP_ERROR_CHECK(gpio_set_level(DB4_PIN,0));
+    ESP_ERROR_CHECK(gpio_set_level(DB5_PIN,0));
+    ESP_ERROR_CHECK(gpio_set_level(DB6_PIN,0));
+    ESP_ERROR_CHECK(gpio_set_level(DB7_PIN,0));
+    ESP_ERROR_CHECK(gpio_set_level(RS_PIN,0));
+    ESP_ERROR_CHECK(gpio_set_level(ENABLE_PIN,0));
 
     out_nibble(0x03);
     vTaskDelay(pdMS_TO_TICKS(1));
@@ -86,10 +87,11 @@ void lcd_init() {
     vTaskDelay(pdMS_TO_TICKS(1));
     out_nibble(0x03);
     vTaskDelay(pdMS_TO_TICKS(1));
-
     out_nibble(0x02);
+    vTaskDelay(pdMS_TO_TICKS(1));
+
     send_command(FUNCTION_SET | TWO_LINES | FONT_5X8);
     send_command(DISPLAY_CONTROL | DISPLAY_ON | SHOW_CURSOR);
-    clear_display();
+    lcd_clear_display();
     send_command(ENTRY_MODE_SET | CURSOR_DIR_RIGHT);
 }

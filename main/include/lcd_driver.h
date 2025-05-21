@@ -16,12 +16,12 @@
 #endif
 
 // PIN CONFIGURATION
-#define RS_PIN              GPIO_NUM_26     // Register Select 1 = Data | 0 = Command
-#define ENABLE_PIN          GPIO_NUM_25     // Setting to 1 signals the lcd to read the databuses
-#define DB4_PIN             GPIO_NUM_17     // Databus 4
-#define DB5_PIN             GPIO_NUM_16     // Databus 5
-#define DB6_PIN             GPIO_NUM_27     // Databus 6
-#define DB7_PIN             GPIO_NUM_14     // Databus 7
+#define RS_PIN              GPIO_NUM_15     // Register Select 1 = Data | 0 = Command
+#define ENABLE_PIN          GPIO_NUM_2     // Setting to 1 signals the lcd to read the databuses
+#define DB4_PIN             GPIO_NUM_0     // Databus 4
+#define DB5_PIN             GPIO_NUM_4     // Databus 5
+#define DB6_PIN             GPIO_NUM_16     // Databus 6
+#define DB7_PIN             GPIO_NUM_17     // Databus 7
 
 // OWN COMMAND
 #define ENABLE_READ() (gpio_set_level(ENABLE_PIN, 1))   // Signals the LCD to read the databusses
